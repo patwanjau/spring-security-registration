@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -88,6 +89,20 @@ public class RegistrationController {
         );
 
         return new ModelAndView("console", model);
+    }
+
+    @GetMapping("/management")
+    @PreAuthorize("hasRole('MANAGER')")
+    public ModelAndView management(final HttpServletRequest request, final ModelMap model,
+                                   @RequestParam("messageKey") final Optional<String> messageKey) {
+        Locale locale = request.getLocale();
+        messageKey.ifPresent( key -> {
+                String message = messages.getMessage(key, null, locale);
+                model.addAttribute("message", message);
+            }
+        );
+
+        return new ModelAndView("management", model);
     }
 
     @GetMapping("/badUser")

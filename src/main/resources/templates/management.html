@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Management Console</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav th:replace="~{console :: navbar}"></nav>
+<div class="container">
+    <h1>Management</h1>
+    <div sec:authorize="hasRole('MANAGER')">
+        Management ONLY access
+    </div>
+</div>
+</body>
+</html>

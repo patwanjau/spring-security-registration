@@ -10,6 +10,7 @@ public class RoleHierarchyController {
     @GetMapping("/roleHierarchy")
     public ModelAndView roleHierarcy() {
         ModelAndView model = new ModelAndView();
+        model.addObject("managementMessage","Management content available");
         model.addObject("adminMessage","Admin content available");
         model.addObject("staffMessage","Staff content available");
         model.addObject("userMessage","User content available");
